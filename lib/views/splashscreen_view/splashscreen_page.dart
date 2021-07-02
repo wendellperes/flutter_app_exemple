@@ -39,7 +39,7 @@ class SplashPageState extends State<Splashscreen> {
                 children: [
                   Container(
                     child: Center(
-                      child: Image.asset('images/logo1.jpg')
+                      child: Image.asset('images/logo-teste2.jpg')
                     ),
                   ),
                   SpinKitThreeBounce(

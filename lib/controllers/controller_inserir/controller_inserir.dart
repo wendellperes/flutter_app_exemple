@@ -10,36 +10,55 @@ part 'controller_inserir.g.dart';
 class ControllerInserir = _ControllerInserirBase with _$ControllerInserir;
 
 abstract class _ControllerInserirBase with Store {
-  ControllerGeral controllerGeral;
+  ControllerGeral controllerGeral =  ControllerGeral();
 @observable
  int idCadastro;
-
+@observable
+ int idade;
 @action
   Future<void>Cadastrar({
   @required String nome,
   @required String email,
-  @required String nascimento,
+  @required String  data_nascimento,
   @required String sexo,
-  @required String idade,
-  @required String data,}
+  @required String data,
+  @required Function onsuccess,}
   ) async {
-   var dados =  Usuario(
-     name: nome,
-     email: email,
-     nascimento: nascimento,
-     sexo: sexo,
-     idade: idade,
-     data_criacao: data
-   );
 
    try {
      final Database db = await controllerGeral.getDatabase();
+     //Bloco Responsavel por pegar a idade do usuarios
+     var campos = data_nascimento.split('-');
+     int ano = int.parse(campos[0]);
+     int mes = int.parse(campos[1]);
+     int dia = int.parse(campos[2]);
 
+     DateTime nascimento_format = DateTime(ano,mes,dia,);
+     DateTime hoje = DateTime.now();
+
+     idade = hoje.year - nascimento_format.year;
+     if (hoje.month<nascimento_format.month)
+       idade--;
+     else if (hoje.month==nascimento_format.month){
+       if (hoje.day<nascimento_format.day)
+         idade--;
+     }
+
+     //////
+     var dados =  Usuario(
+         name: nome,
+         email: email,
+         nascimento: data_nascimento,
+         sexo: sexo,
+         idade: idade,
+         data_criacao: data
+     );
+     print(idade);
      idCadastro  = await db.insert(
        'tbl_usuario',
        dados.toMap(),
      );
-     print(idCadastro);
+     idCadastro != 0 ? onsuccess(true) : onsuccess(false);
    } catch (ex) {
      print(ex);
      return;

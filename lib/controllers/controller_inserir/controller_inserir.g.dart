@@ -24,6 +24,21 @@ mixin _$ControllerInserir on _ControllerInserirBase, Store {
     });
   }
 
+  final _$idadeAtom = Atom(name: '_ControllerInserirBase.idade');
+
+  @override
+  int get idade {
+    _$idadeAtom.reportRead();
+    return super.idade;
+  }
+
+  @override
+  set idade(int value) {
+    _$idadeAtom.reportWrite(value, super.idade, () {
+      super.idade = value;
+    });
+  }
+
   final _$CadastrarAsyncAction =
       AsyncAction('_ControllerInserirBase.Cadastrar');
 
@@ -31,23 +46,24 @@ mixin _$ControllerInserir on _ControllerInserirBase, Store {
   Future<void> Cadastrar(
       {String nome,
       String email,
-      String nascimento,
+      String data_nascimento,
       String sexo,
-      String idade,
-      String data}) {
+      String data,
+      Function onsuccess}) {
     return _$CadastrarAsyncAction.run(() => super.Cadastrar(
         nome: nome,
         email: email,
-        nascimento: nascimento,
+        data_nascimento: data_nascimento,
         sexo: sexo,
-        idade: idade,
-        data: data));
+        data: data,
+        onsuccess: onsuccess));
   }
 
   @override
   String toString() {
     return '''
-idCadastro: ${idCadastro}
+idCadastro: ${idCadastro},
+idade: ${idade}
     ''';
   }
 }
