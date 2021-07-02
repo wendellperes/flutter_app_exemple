@@ -9,10 +9,45 @@ part of 'controller_inserir.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ControllerInserir on _ControllerInserirBase, Store {
+  final _$idCadastroAtom = Atom(name: '_ControllerInserirBase.idCadastro');
+
+  @override
+  int get idCadastro {
+    _$idCadastroAtom.reportRead();
+    return super.idCadastro;
+  }
+
+  @override
+  set idCadastro(int value) {
+    _$idCadastroAtom.reportWrite(value, super.idCadastro, () {
+      super.idCadastro = value;
+    });
+  }
+
+  final _$CadastrarAsyncAction =
+      AsyncAction('_ControllerInserirBase.Cadastrar');
+
+  @override
+  Future<void> Cadastrar(
+      {String nome,
+      String email,
+      String nascimento,
+      String sexo,
+      String idade,
+      String data}) {
+    return _$CadastrarAsyncAction.run(() => super.Cadastrar(
+        nome: nome,
+        email: email,
+        nascimento: nascimento,
+        sexo: sexo,
+        idade: idade,
+        data: data));
+  }
+
   @override
   String toString() {
     return '''
-
+idCadastro: ${idCadastro}
     ''';
   }
 }
