@@ -10,6 +10,7 @@
   -   flutter clean
   -   flutter pub get
   -   flutter packages pub run build_runner build --delete-conflicting-outputs
+
 #### Em seguida para ficar tudo certo rode o comando para criar o arquivo .g
   -   flutter packages pub run build_runner build
   -   A cada nova alteração sera necessario rodar este comando novamente ou

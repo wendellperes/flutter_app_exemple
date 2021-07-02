@@ -1,3 +1,4 @@
+import 'package:avaliacao_empresa_flutter/views/criar_cadastro_view/criarCadastro.dart';
 import 'package:flutter/material.dart';
 import 'package:avaliacao_empresa_flutter/controllers/controller_busca/controller_busca.dart';
 import 'package:avaliacao_empresa_flutter/controllers/controller_delete/controller_delete.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         //uso Rotas Nomeadas
         '/': (context) => Splashscreen(),
         '/home': (context) => Home(),
+        '/Cadastrar': (context) => CreateUser(),
       },
       initialRoute: '/',
     );

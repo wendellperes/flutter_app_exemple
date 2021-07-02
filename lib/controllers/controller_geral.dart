@@ -16,28 +16,12 @@ abstract class _ControllerGeralBase with Store {
   String colId          = 'id';
   String colNome        = 'nome';
   String colEmail       = 'email';
+  String colSexo        = 'sexo';
   String colSenha       = 'senha';
   String colData        = 'data_cadastro';
 
-  //Definindo a Estrutura da Tabela_produto
-  String nomeTabela_produto     = 'tbl_produto';
-  String colId_produto          = 'id';
-  String colNome_produto        = 'nome_produto'; //obrigatorio
-  String colpreco               = 'preco';
-  String colquantidade_estoque  = 'qtd_estoque';
-  String colcodigo              = 'codigo'; // obrigatorio
-  String colData_produto        = 'data_cadastro';
-
-
-
-
   @observable
   Database _database;
-
-
-
-
-
 
   //Método que ira verificar se o banco foi inicializado
   Future<Database> get database async{
@@ -57,17 +41,11 @@ abstract class _ControllerGeralBase with Store {
             '$colId INTEGER PRIMARY KEY AUTOINCREMENT, '
             '$colNome Text,'
             '$colEmail Text,'
+            '$colSexo Text,'
             '$colSenha Text,'
             '$colData Text)'
         );
-        await db.execute('CREATE TABLE $nomeTabela_produto ('
-            '$colId_produto INTEGER PRIMARY KEY AUTOINCREMENT, '
-            '$colNome_produto Text,'
-            '$colpreco Text,'
-            '$colquantidade_estoque Text,'
-            '$colcodigo Text,'
-            '$colData_produto Text)'
-        );
+
       },
       version: 1,
     );
