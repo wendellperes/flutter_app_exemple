@@ -1,10 +1,14 @@
 
+import 'package:avaliacao_empresa_flutter/componentes/loading.dart';
+import 'package:avaliacao_empresa_flutter/controllers/controller_busca/controller_busca.dart';
 import 'package:avaliacao_empresa_flutter/views/Cards/cards_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:avaliacao_empresa_flutter/componentes/app_colors.dart';
 import 'package:avaliacao_empresa_flutter/componentes/app_text_styles.dart';
 import 'package:avaliacao_empresa_flutter/componentes/drawer/drawer.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,49 +16,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeViewState extends State<Home> {
-
-  List<Map> lista_pessoas = [];
-
+  ControllerBusca controllerBusca = ControllerBusca();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
+  @override
+  void didChangeDependencies() async {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+     controllerBusca = Provider.of<ControllerBusca>(context, listen: false);
+     controllerBusca.buscarDadosGerais();
 
-    var Pessoa1 = {
-      "id": "1",
-      "nome": "1",
-      "email": "1",
-      "nascimento": "1",
-      "idade": "1",
-      "sexo": "1",
-      "data": "1",
-    };
-    var Pessoa2 = {
-      "id": "2",
-      "nome": "1",
-      "email": "1",
-      "nascimento": "1",
-      "idade": "1",
-      "sexo": "1",
-      "data": "1",
-    };
-    var Pessoa3 = {
-      "id": "3",
-      "nome": "1",
-      "email": "1",
-      "nascimento": "1",
-      "idade": "1",
-      "sexo": "1",
-      "data": "1",
-    };
-
-    lista_pessoas.add(Pessoa1);
-    lista_pessoas.add(Pessoa2);
-    lista_pessoas.add(Pessoa3);
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: AppColors.purple,
@@ -62,19 +41,22 @@ class _HomeViewState extends State<Home> {
         centerTitle: true,
       ),
       drawer: CustomDrawer(),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 25,
-          ),
-          Cards(listPesoas: lista_pessoas,)
-
-        ],
+      body:  Observer(
+        builder: (_){
+          return controllerBusca.lista_pessoas != null ? Column(
+            children: [
+              SizedBox(
+                height: 25,
+              ),
+              Cards(listPesoas: controllerBusca.lista_pessoas,)
+            ],
+          ) : LoadingPage(title: 'Carregando',);
+        },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.purple,
         onPressed: (){
-          Navigator.pushNamed(context, '/Cadastrar');
+          Navigator.pushReplacementNamed(context, '/Cadastrar');
         },
         child: Icon(Icons.add),
       ),

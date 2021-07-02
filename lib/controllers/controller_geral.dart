@@ -16,8 +16,9 @@ abstract class _ControllerGeralBase with Store {
   String colId          = 'id';
   String colNome        = 'nome';
   String colEmail       = 'email';
+  String colNascimento  = 'nascimento';
   String colSexo        = 'sexo';
-  String colSenha       = 'senha';
+  String colIdade       = 'idade';
   String colData        = 'data_cadastro';
 
   @observable
@@ -41,8 +42,9 @@ abstract class _ControllerGeralBase with Store {
             '$colId INTEGER PRIMARY KEY AUTOINCREMENT, '
             '$colNome Text,'
             '$colEmail Text,'
+            '$colNascimento Text,'
             '$colSexo Text,'
-            '$colSenha Text,'
+            '$colIdade Text,'
             '$colData Text)'
         );
 

@@ -1,7 +1,13 @@
+import 'dart:ffi';
+
 import 'package:avaliacao_empresa_flutter/componentes/app_border_styles.dart';
 import 'package:avaliacao_empresa_flutter/componentes/app_colors.dart';
 import 'package:avaliacao_empresa_flutter/componentes/app_text_styles.dart';
 import 'package:avaliacao_empresa_flutter/componentes/button_custom/button_custom.dart';
+import 'package:avaliacao_empresa_flutter/componentes/loading.dart';
+import 'package:avaliacao_empresa_flutter/componentes/popup/popup.dart';
+import 'package:avaliacao_empresa_flutter/controllers/controller_inserir/controller_inserir.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,42 +22,51 @@ class _CreateUserState extends State<CreateUser> {
   final TextEditingController _nome = TextEditingController();
   final TextEditingController _emailControle = TextEditingController();
   final TextEditingController _dataNascimento = TextEditingController();
-
-  bool _securityPassword = true;
+  final String _dataControler                    = DateTime.now().toString();
+  bool isSalvando = false;
+  String sexo = 'Masculino';
   bool isCheckLogin;
+  ControllerInserir controllerInserir;
 
-  //ControllerBusca controllerBusca;
-
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    NativeApi.initializeApiDLData.address.toString();
+  }
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    //controllerBusca = Provider.of<ControllerBusca>(context, listen: false);
+    controllerInserir = Provider.of<ControllerInserir>(context, listen: false);
   }
-  _loginSucess( bool response){
+  _onsuccess( bool response){
     if (response == true){
       print(response);
       _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Entrando...'),
+        content: Text('Cadastrando...'),
         backgroundColor: Colors.green,
       ));
       Navigator.pushReplacementNamed(context, '/home');
     }else{
       _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Email ou Senha Inválidos...'),
+        content: Text('Error ao tentar Cadastrar'),
         backgroundColor: Colors.red,
       ));
     }
+  }
+  void dropChange(String val){
+    print(val);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         key: _scaffoldKey,
         body: Container(
           color: Colors.white,
-          child: Center(
+          child: isSalvando != true ? Center(
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -84,6 +99,7 @@ class _CreateUserState extends State<CreateUser> {
                           TextFormField(
                             controller: _nome,
                             keyboardType: TextInputType.text,
+                            maxLength: 70,
                             decoration: InputDecoration(
                               labelText: 'Nome*',
                               labelStyle: TextStyle(
@@ -99,8 +115,6 @@ class _CreateUserState extends State<CreateUser> {
                             validator: (value){
                               if ( value.isEmpty){
                                 return 'Campo nao pode ser vazio';
-                              } else if(!value.contains('@')){
-                                return 'e-mail Inválido!';
                               }
                               return null;
                             },
@@ -136,10 +150,8 @@ class _CreateUserState extends State<CreateUser> {
                           SizedBox(
                             height: 15,
                           ),
-                          TextFormField(
-                            controller: _dataNascimento,
-                            keyboardType: TextInputType.number,
-
+                          DateTimePicker(
+                            type: DateTimePickerType.date,
                             decoration: InputDecoration(
                               labelText: 'Data Nascimento*',
                               labelStyle: TextStyle(
@@ -152,11 +164,18 @@ class _CreateUserState extends State<CreateUser> {
                               focusedBorder: focusedBorder,
                               border:  border,
                             ),
+                            dateMask: 'dd/MM/yyyy',
+                            firstDate: DateTime(1500),
+                            lastDate: DateTime(2100),
+                            timeLabelText: "Horas",
+                            locale: Locale("pt", "BR"),
+
+                            onChanged: (val) async {
+                              _dataNascimento.text = val;
+                            },
                             validator: (value){
                               if ( value.isEmpty){
                                 return 'Campo nao pode ser vazio';
-                              } else if(!value.contains('@')){
-                                return 'e-mail Inválido!';
                               }
                               return null;
                             },
@@ -164,12 +183,9 @@ class _CreateUserState extends State<CreateUser> {
                           SizedBox(
                             height: 15,
                           ),
-                          TextFormField(
-                            controller: _emailControle,
-                            keyboardType: TextInputType.number,
-
+                          DropdownButtonFormField(
                             decoration: InputDecoration(
-                              labelText: 'Sexo em dropdonw*',
+                              labelText: 'Sexo',
                               labelStyle: TextStyle(
                                 fontSize: 15,
                                 color: Colors.black38,
@@ -180,42 +196,69 @@ class _CreateUserState extends State<CreateUser> {
                               focusedBorder: focusedBorder,
                               border:  border,
                             ),
+                            value: sexo,
                             validator: (value){
                               if ( value.isEmpty){
                                 return 'Campo nao pode ser vazio';
-                              } else if(!value.contains('@')){
-                                return 'e-mail Inválido!';
                               }
                               return null;
                             },
+                            onChanged: dropChange,
+                              items: <String>['Masculino', 'Feminino', 'Indiferente']
+                                  .map<DropdownMenuItem<String>>((String value){
+                                return DropdownMenuItem<String>(
+                                  child: Text(
+                                    value,
+                                  ),
+                                  value: value,
+                                );
+                              }).toList(),
+
                           ),
+
                         ],
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 25,
                   ),
                   Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ButtonCustom(
-                          title: 'Adicionar',
+                          title: 'Cancelar',
                           ontap: (){
-                            print('cadastrar');
+                            showDialog(
+                                context: context,
+                                builder: (context) => Popup()
+                            );
                           },
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         ButtonCustom(
-                          title: 'Cancelar',
-                          ontap: (){
-                            print('cancelar');
+                          title: 'Adicionar',
+                          ontap: () async {
+                            if(_formKey.currentState.validate()){
+                              setState(() {
+                                isSalvando = true;
+                              });
+                              //
+                              await controllerInserir.Cadastrar(
+                                nome: _nome.text,
+                                email: _emailControle.text,
+                                data_nascimento: _dataNascimento.text,
+                                sexo: sexo,
+                                data: _dataControler,
+                                onsuccess: _onsuccess
+                              );
+
+                            }
                           },
                         ),
-
                       ],
                     ),
                   ),
@@ -227,7 +270,7 @@ class _CreateUserState extends State<CreateUser> {
                 ],
               ),
             ),
-          ),
+          ) : LoadingPage(title: 'Salvando...',)
         )
 
     );

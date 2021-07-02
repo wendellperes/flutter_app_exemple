@@ -19,6 +19,7 @@ class _CardsState extends State<Cards> {
             itemBuilder: (context, index){
               return GestureDetector(
                 onTap: (){
+                  print('editar ou excluir');
                   // Navigator.pushNamed(
                   //     context,
                   //     '/atualizar_produto',
@@ -49,23 +50,6 @@ class _CardsState extends State<Cards> {
                                     Text('${widget.listPesoas[index]['nome']}', style: AppTextStyles.bodylightGrey,),
                                   ],
                                 ),
-                                //Button de Excluir o produto
-                                Container(
-                                    height: 30,
-                                    width: 30,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: AppColors.inicialRed,
-                                    ),
-                                    child: IconButton(
-                                      icon: Icon(Icons.clear),
-                                      iconSize: 15,
-                                      onPressed: () async {
-
-                                      },
-                                    )
-                                ),
-
                               ],
                             ),
                           ),
@@ -103,7 +87,7 @@ class _CardsState extends State<Cards> {
                             child: Row(
                               children: [
                                 Text('Data Cadastro: ', style: AppTextStyles.heading15,),
-                                Text('${widget.listPesoas[index]['data']}' , style: AppTextStyles.bodylightGrey,),
+                                Text('${widget.listPesoas[index]['data_cadastro']}' , style: AppTextStyles.bodylightGrey,),
                               ],
                             ),
                           ),

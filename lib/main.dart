@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:avaliacao_empresa_flutter/controllers/controller_busca/controller_busca.dart';
 import 'package:avaliacao_empresa_flutter/controllers/controller_delete/controller_delete.dart';
 import 'package:avaliacao_empresa_flutter/controllers/controller_geral.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'controllers/controller_inserir/controller_inserir.dart';
 import 'controllers/controller_update/controller_update.dart';
@@ -51,6 +52,12 @@ class MyApp extends StatelessWidget {
         '/Cadastrar': (context) => CreateUser(),
       },
       initialRoute: '/',
+      localizationsDelegates: [
+        GlobalWidgetsLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [Locale('pt', 'BR')],
     );
   }
 }
