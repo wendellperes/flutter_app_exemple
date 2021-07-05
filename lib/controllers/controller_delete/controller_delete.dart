@@ -12,7 +12,24 @@ part 'controller_delete.g.dart';
 class ControllerDelete = _ControllerDeleteBase with _$ControllerDelete;
 
 abstract class _ControllerDeleteBase with Store {
+  ControllerGeral controllerGeral =  ControllerGeral();
+  @action
+  Future<void>deletarDados({@ required int id}) async {
+    try {
+      final Database db = await controllerGeral.getDatabase();
+      await db.delete(
+        'tbl_usuario',
+        where: "id = ?",
+        whereArgs: [id],
+      );
+      return true;
 
+      //idCadastro != 0 ? onsuccess(true) : onsuccess(false);
+    } catch (ex) {
+      print(ex);
+      return;
+    }
+  }
 
 
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../app_colors.dart';
-class Popup extends StatelessWidget {
+class PopupCorfirmacao extends StatelessWidget {
   final String title;
   final Function FunctionButton1;
   final Function FunctionButton2;
   final String titleButton1;
   final String titleButton2;
 
-  const Popup({Key key, this.title, this.FunctionButton1, this.FunctionButton2, this.titleButton1, this.titleButton2}) : super(key: key);
+  const PopupCorfirmacao({Key key, this.title, this.FunctionButton1, this.FunctionButton2, this.titleButton1, this.titleButton2}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
