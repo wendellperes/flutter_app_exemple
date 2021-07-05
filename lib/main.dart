@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'controllers/controller_inserir/controller_inserir.dart';
 import 'controllers/controller_update/controller_update.dart';
+import 'views/atualizar_cadastro_view/atualizar_cadastro_view.dart';
 import 'views/home_view/home.dart';
 import 'views/splashscreen_view/splashscreen_page.dart';
 
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Splashscreen(),
         '/home': (context) => Home(),
         '/Cadastrar': (context) => CreateUser(),
+        '/Atualizar': (context) => UpdateUser(),
       },
       initialRoute: '/',
       localizationsDelegates: [

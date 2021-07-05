@@ -25,7 +25,6 @@ class _CreateUserState extends State<CreateUser> {
   final String _dataControler                    = DateTime.now().toString();
   bool isSalvando = false;
   String sexo = 'Masculino';
-  bool isCheckLogin;
   ControllerInserir controllerInserir;
 
   @override
@@ -56,7 +55,7 @@ class _CreateUserState extends State<CreateUser> {
     }
   }
   void dropChange(String val){
-    print(val);
+    sexo = val;
   }
 
   @override
@@ -229,10 +228,22 @@ class _CreateUserState extends State<CreateUser> {
                       children: [
                         ButtonCustom(
                           title: 'Cancelar',
+                          color: AppColors.darkRed,
                           ontap: (){
                             showDialog(
                                 context: context,
-                                builder: (context) => Popup()
+                                builder: (context) =>
+                                    Popup(
+                                      title: 'Você realmente Deseja Fechar a Tela?',
+                                      titleButton1: 'Sim',
+                                      titleButton2: 'Não',
+                                      FunctionButton1: (){
+                                        Navigator.pushReplacementNamed(context, '/home');
+                                      },
+                                      FunctionButton2: (){
+                                        Navigator.pop(context);
+                                      },
+                                    )
                             );
                           },
                         ),
@@ -241,6 +252,7 @@ class _CreateUserState extends State<CreateUser> {
                         ),
                         ButtonCustom(
                           title: 'Adicionar',
+                          color: AppColors.purple,
                           ontap: () async {
                             if(_formKey.currentState.validate()){
                               setState(() {

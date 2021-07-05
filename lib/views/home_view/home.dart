@@ -1,5 +1,6 @@
 
 import 'package:avaliacao_empresa_flutter/componentes/loading.dart';
+import 'package:avaliacao_empresa_flutter/componentes/popup/popup.dart';
 import 'package:avaliacao_empresa_flutter/controllers/controller_busca/controller_busca.dart';
 import 'package:avaliacao_empresa_flutter/views/Cards/cards_home.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,12 +44,20 @@ class _HomeViewState extends State<Home> {
       drawer: CustomDrawer(),
       body:  Observer(
         builder: (_){
-          return controllerBusca.lista_pessoas != null ? Column(
+          return
+            controllerBusca.lista_pessoas != null ?
+                controllerBusca.lista_pessoas.length == 0 ?
+                Container(
+                  child: Center(child: Text('Nenhum Cadastro encontrado...'),),
+                ):
+          Column(
             children: [
               SizedBox(
                 height: 25,
               ),
-              Cards(listPesoas: controllerBusca.lista_pessoas,)
+              Cards(
+                listPesoas: controllerBusca.lista_pessoas,
+              )
             ],
           ) : LoadingPage(title: 'Carregando',);
         },
