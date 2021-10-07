@@ -6,6 +6,7 @@ import 'package:avaliacao_empresa_flutter/componentes/app_colors.dart';
 
 class Splashscreen extends StatefulWidget {
   @override
+  
   SplashPageState createState() => SplashPageState();
 }
 
@@ -13,7 +14,7 @@ class SplashPageState extends State<Splashscreen> {
   void navigationToNextPage() async {
       Navigator.pushReplacementNamed(context, '/home');
   }
-  
+
 
   startSplashScreenTimer() async {
     var _duration = new Duration(seconds: 5);
