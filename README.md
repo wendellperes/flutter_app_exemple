@@ -9,6 +9,7 @@
 #### Linkedin: https://www.linkedin.com/in/wendell-peres-da-costa-973076147/
 #### Em caso de Erros com Mobx ou Conflitos utilize os seguintes comando em ordem
   -   flutter clean
+  
   -   flutter pub get
   -   flutter packages pub run build_runner build --delete-conflicting-outputs
   -   asdasdasdasdasasd  asdasdasd a das 
