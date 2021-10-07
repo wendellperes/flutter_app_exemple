@@ -13,6 +13,7 @@ class SplashPageState extends State<Splashscreen> {
   void navigationToNextPage() async {
       Navigator.pushReplacementNamed(context, '/home');
   }
+  
 
   startSplashScreenTimer() async {
     var _duration = new Duration(seconds: 5);
