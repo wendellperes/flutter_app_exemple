@@ -10,7 +10,7 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           CustomHeader(),
-          CustomBodyDrawer()
+          CustomBodyDrawer(contexto: context,)
         ],
       ),
     );

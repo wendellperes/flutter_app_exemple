@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 class UpdateUser extends StatefulWidget {
   final  user;
 
-  const UpdateUser({Key key, this.user}) : super(key: key);
+  const UpdateUser({this.user});
 
 
   @override
@@ -28,11 +28,11 @@ class _UpdateUserState extends State<UpdateUser> {
   final TextEditingController _nome = TextEditingController();
   final TextEditingController _emailControle = TextEditingController();
   final TextEditingController _dataNascimento = TextEditingController();
-  DateTime nascimento_format;
+  late DateTime nascimento_format;
   final String _dataControler                    = DateTime.now().toString();
   bool isAtualizando = false;
-  String sexo;
-  ControllerUpdate controllerUpdate;
+  late String sexo;
+  late ControllerUpdate controllerUpdate;
 
   @override
   void initState() {
@@ -63,20 +63,20 @@ class _UpdateUserState extends State<UpdateUser> {
   }
   _onsuccess( bool response){
     if (response == true){
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
+      _scaffoldKey.currentState!.showSnackBar(SnackBar(
         content: Text('Atualizando...'),
         backgroundColor: Colors.green,
       ));
       Navigator.pushReplacementNamed(context, '/home');
     }else{
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
+      _scaffoldKey.currentState!.showSnackBar(SnackBar(
         content: Text('Error ao tentar Atualizar'),
         backgroundColor: Colors.red,
       ));
     }
   }
-  void dropChange(String val){
-    sexo = val;
+  void dropChange(String? val){
+    sexo = val!;
   }
 
   @override
@@ -132,12 +132,6 @@ class _UpdateUserState extends State<UpdateUser> {
                                 focusedBorder: focusedBorder,
                                 border:  border,
                               ),
-                              validator: (value){
-                                if ( value.isEmpty){
-                                  return 'Campo nao pode ser vazio';
-                                }
-                                return null;
-                              },
                             ),
                             SizedBox(
                               height: 15,
@@ -158,14 +152,6 @@ class _UpdateUserState extends State<UpdateUser> {
                                 focusedBorder: focusedBorder,
                                 border:  border,
                               ),
-                              validator: (value){
-                                if ( value.isEmpty){
-                                  return 'Campo nao pode ser vazio';
-                                } else if(!value.contains('@')){
-                                  return 'e-mail Inválido!';
-                                }
-                                return null;
-                              },
                             ),
                             SizedBox(
                               height: 15,
@@ -194,12 +180,6 @@ class _UpdateUserState extends State<UpdateUser> {
                               onChanged: (val) async {
                                 _dataNascimento.text = val;
                               },
-                              validator: (value){
-                                if ( value.isEmpty){
-                                  return 'Campo nao pode ser vazio';
-                                }
-                                return null;
-                              },
                             ),
                             SizedBox(
                               height: 15,
@@ -218,12 +198,6 @@ class _UpdateUserState extends State<UpdateUser> {
                                 border:  border,
                               ),
                               value: sexo,
-                              validator: (value){
-                                if ( value.isEmpty){
-                                  return 'Campo nao pode ser vazio';
-                                }
-                                return null;
-                              },
                               onChanged: dropChange,
                               items: <String>['Masculino', 'Feminino', 'Indiferente']
                                   .map<DropdownMenuItem<String>>((String value){
@@ -276,7 +250,7 @@ class _UpdateUserState extends State<UpdateUser> {
                             title: 'Atualizar',
                             color: AppColors.purple,
                             ontap: () async {
-                              if(_formKey.currentState.validate()){
+                              if(_formKey.currentState!.validate()){
                                 setState(() {
                                   isAtualizando = true;
                                 });

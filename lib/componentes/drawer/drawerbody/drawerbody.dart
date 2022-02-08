@@ -9,15 +9,15 @@ import 'package:provider/provider.dart';
 
 class CustomBodyDrawer extends StatefulWidget {
   final BuildContext contexto;
-  const CustomBodyDrawer({Key key, this.contexto}) : super(key: key);
+  const CustomBodyDrawer({Key? key, required this.contexto}) : super(key: key);
 
   @override
   _CustomBodyDrawerState createState() => _CustomBodyDrawerState();
 }
 
 class _CustomBodyDrawerState extends State<CustomBodyDrawer> {
-  ControllerDelete controllerDelete;
-  ControllerBusca  controllerBusca;
+  late ControllerDelete controllerDelete;
+  late ControllerBusca  controllerBusca;
   bool val = false;
   onNotificacao(bool valor){
     setState(()  {

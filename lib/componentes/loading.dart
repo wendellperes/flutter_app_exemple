@@ -5,7 +5,7 @@ import 'package:avaliacao_empresa_flutter/componentes/app_text_styles.dart';
 class LoadingPage extends StatefulWidget {
   final String title;
 
-  const LoadingPage({Key key, this.title}) : super(key: key);
+  const LoadingPage({required this.title});
 
   @override
   _LoadingPageState createState() => _LoadingPageState();

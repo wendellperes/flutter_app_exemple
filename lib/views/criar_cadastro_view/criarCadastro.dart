@@ -25,7 +25,7 @@ class _CreateUserState extends State<CreateUser> {
   final String _dataControler                    = DateTime.now().toString();
   bool isSalvando = false;
   String sexo = 'Masculino';
-  ControllerInserir controllerInserir;
+  late ControllerInserir controllerInserir;
 
   @override
   void initState() {
@@ -42,20 +42,20 @@ class _CreateUserState extends State<CreateUser> {
   _onsuccess( bool response){
     if (response == true){
       print(response);
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
+      _scaffoldKey.currentState!.showSnackBar(SnackBar(
         content: Text('Cadastrando...'),
         backgroundColor: Colors.green,
       ));
       Navigator.pushReplacementNamed(context, '/home');
     }else{
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
+      _scaffoldKey.currentState!.showSnackBar(SnackBar(
         content: Text('Error ao tentar Cadastrar'),
         backgroundColor: Colors.red,
       ));
     }
   }
-  void dropChange(String val){
-    sexo = val;
+  void dropChange(String? val){
+    sexo = val!;
   }
 
   @override
@@ -110,9 +110,10 @@ class _CreateUserState extends State<CreateUser> {
                               enabledBorder: enabledBorder,
                               focusedBorder: focusedBorder,
                               border:  border,
+                              counterText: ''
                             ),
                             validator: (value){
-                              if ( value.isEmpty){
+                              if ( value!.isEmpty){
                                 return 'Campo nao pode ser vazio';
                               }
                               return null;
@@ -124,7 +125,6 @@ class _CreateUserState extends State<CreateUser> {
                           TextFormField(
                             controller: _emailControle,
                             keyboardType: TextInputType.emailAddress,
-
                             decoration: InputDecoration(
                               labelText: 'Email*',
                               labelStyle: TextStyle(
@@ -138,7 +138,7 @@ class _CreateUserState extends State<CreateUser> {
                               border:  border,
                             ),
                             validator: (value){
-                              if ( value.isEmpty){
+                              if ( value!.isEmpty){
                                 return 'Campo nao pode ser vazio';
                               } else if(!value.contains('@')){
                                 return 'e-mail Inválido!';
@@ -168,12 +168,11 @@ class _CreateUserState extends State<CreateUser> {
                             lastDate: DateTime(2100),
                             timeLabelText: "Horas",
                             locale: Locale("pt", "BR"),
-
                             onChanged: (val) async {
                               _dataNascimento.text = val;
                             },
                             validator: (value){
-                              if ( value.isEmpty){
+                              if ( value!.isEmpty){
                                 return 'Campo nao pode ser vazio';
                               }
                               return null;
@@ -196,12 +195,6 @@ class _CreateUserState extends State<CreateUser> {
                               border:  border,
                             ),
                             value: sexo,
-                            validator: (value){
-                              if ( value.isEmpty){
-                                return 'Campo nao pode ser vazio';
-                              }
-                              return null;
-                            },
                             onChanged: dropChange,
                               items: <String>['Masculino', 'Feminino', 'Indiferente']
                                   .map<DropdownMenuItem<String>>((String value){
@@ -254,7 +247,7 @@ class _CreateUserState extends State<CreateUser> {
                           title: 'Adicionar',
                           color: AppColors.purple,
                           ontap: () async {
-                            if(_formKey.currentState.validate()){
+                            if(_formKey.currentState!.validate()){
                               setState(() {
                                 isSalvando = true;
                               });

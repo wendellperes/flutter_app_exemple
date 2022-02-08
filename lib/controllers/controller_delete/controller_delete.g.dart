@@ -13,7 +13,7 @@ mixin _$ControllerDelete on _ControllerDeleteBase, Store {
       AsyncAction('_ControllerDeleteBase.deletarDados');
 
   @override
-  Future<void> deletarDados({int id}) {
+  Future<bool> deletarDados({int? id}) {
     return _$deletarDadosAsyncAction.run(() => super.deletarDados(id: id));
   }
 

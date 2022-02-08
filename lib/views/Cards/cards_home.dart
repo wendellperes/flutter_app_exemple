@@ -9,13 +9,13 @@ import 'package:provider/provider.dart';
 
 class Cards extends StatefulWidget {
   final List listPesoas;
-  const Cards({Key key, this.listPesoas, }) : super(key: key);
+  const Cards({required this.listPesoas, });
   @override
   _CardsState createState() => _CardsState();
 }
 
 class _CardsState extends State<Cards> {
-  ControllerDelete controllerDelete;
+  late ControllerDelete controllerDelete;
 
   @override
   void didChangeDependencies() {
@@ -75,7 +75,7 @@ class _CardsState extends State<Cards> {
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
-                        color: AppColors.purple,
+                        color: Colors.amber,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

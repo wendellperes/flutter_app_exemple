@@ -13,24 +13,24 @@ class ControllerUpdate = _ControllerUpdateBase with _$ControllerUpdate;
 abstract class _ControllerUpdateBase with Store {
   ControllerGeral controllerGeral =  ControllerGeral();
   @observable
-  int idCadastro;
+  int idCadastro = 0;
   @observable
-  int idade;
+  int idade = 0;
   @action
   Future<void>Atualizar({
-    @required int id,
-    @required String nome,
-    @required String email,
-    @required String  data_nascimento,
-    @required String sexo,
-    @required String data,
-    @required Function onsuccess,}
+    @required int? id,
+    @required String? nome,
+    @required String? email,
+    @required String?  data_nascimento,
+    @required String? sexo,
+    @required String? data,
+    @required Function? onsuccess,}
       ) async {
 
     try {
       final Database db = await controllerGeral.getDatabase();
       //Retira espacos vazios e com pontos para ele rodar no split
-      String dataNasc = data_nascimento.replaceAll('0', '').replaceAll(':', '')
+      String dataNasc = data_nascimento!.replaceAll('0', '').replaceAll(':', '')
           .replaceAll(' ', '').replaceAll('.', '');
 
       var campos = dataNasc.split('-',);
@@ -51,13 +51,13 @@ abstract class _ControllerUpdateBase with Store {
 
       //////
       var dados =  Usuario(
-          id: id,
-          name: nome,
-          email: email,
+          id: id!,
+          name: nome!,
+          email: email!,
           nascimento: data_nascimento,
-          sexo: sexo,
+          sexo: sexo!,
           idade: idade,
-          data_criacao: data
+          data_criacao: data!
       );
       await db.update(
         'tbl_usuario',
@@ -65,9 +65,9 @@ abstract class _ControllerUpdateBase with Store {
         where: "id = ?",
         whereArgs: [id],
       );
-      onsuccess(true);
+      onsuccess!(true);
     } catch (ex) {
-      onsuccess(false);
+      onsuccess!(false);
       print(ex);
       return;
     }

@@ -22,12 +22,19 @@ abstract class _ControllerGeralBase with Store {
   String colData        = 'data_cadastro';
 
   @observable
-  Database _database;
+  late Database _database;
 
   //Método que ira verificar se o banco foi inicializado
-  Future<Database> get database async{
-    if (_database == null){
-      _database = await getDatabase();
+  Future<Database> update() async {
+    try {
+      if(_database == null ){
+        return _database = getDatabase() as Database;
+      }else{
+        return _database;
+      }
+    }  catch (e) {
+      print(e.toString());
+      throw Exception;
     }
   }
 

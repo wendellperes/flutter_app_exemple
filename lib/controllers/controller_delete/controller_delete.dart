@@ -14,7 +14,7 @@ class ControllerDelete = _ControllerDeleteBase with _$ControllerDelete;
 abstract class _ControllerDeleteBase with Store {
   ControllerGeral controllerGeral =  ControllerGeral();
   @action
-  Future<void>deletarDados({@ required int id}) async {
+  Future<bool>deletarDados({@ required int? id}) async {
     try {
       final Database db = await controllerGeral.getDatabase();
       await db.delete(
@@ -27,7 +27,7 @@ abstract class _ControllerDeleteBase with Store {
       //idCadastro != 0 ? onsuccess(true) : onsuccess(false);
     } catch (ex) {
       print(ex);
-      return;
+      return false;
     }
   }
 

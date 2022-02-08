@@ -43,13 +43,13 @@ mixin _$ControllerUpdate on _ControllerUpdateBase, Store {
 
   @override
   Future<void> Atualizar(
-      {int id,
-      String nome,
-      String email,
-      String data_nascimento,
-      String sexo,
-      String data,
-      Function onsuccess}) {
+      {int? id,
+      String? nome,
+      String? email,
+      String? data_nascimento,
+      String? sexo,
+      String? data,
+      Function? onsuccess}) {
     return _$AtualizarAsyncAction.run(() => super.Atualizar(
         id: id,
         nome: nome,

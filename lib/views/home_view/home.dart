@@ -38,7 +38,7 @@ class _HomeViewState extends State<Home> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: AppColors.purple,
-        title: Text('HOME - Pessoas'),
+        title: Text('Joao Desenvolvedor'),
         centerTitle: true,
       ),
       drawer: CustomDrawer(),
@@ -46,7 +46,7 @@ class _HomeViewState extends State<Home> {
         builder: (_){
           return
             controllerBusca.lista_pessoas != null ?
-                controllerBusca.lista_pessoas.length == 0 ?
+                controllerBusca.lista_pessoas!.length == 0 ?
                 Container(
                   child: Center(child: Text('Nenhum Cadastro encontrado...'),),
                 ):
@@ -56,7 +56,7 @@ class _HomeViewState extends State<Home> {
                 height: 25,
               ),
               Cards(
-                listPesoas: controllerBusca.lista_pessoas,
+                listPesoas: controllerBusca.lista_pessoas!,
               )
             ],
           ) : LoadingPage(title: 'Carregando',);

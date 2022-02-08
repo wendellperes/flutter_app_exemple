@@ -12,7 +12,7 @@ abstract class _ControllerBuscaBase with Store {
   ControllerGeral controllerGeral =  ControllerGeral();
 
   @observable
-  List<Map> lista_pessoas;
+  List<Map>? lista_pessoas;
   //Método Responsavel Pela Captura de Dados Gerais
   @action
   Future<void>buscarDadosGerais() async {

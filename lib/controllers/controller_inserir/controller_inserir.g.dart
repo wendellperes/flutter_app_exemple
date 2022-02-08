@@ -12,13 +12,13 @@ mixin _$ControllerInserir on _ControllerInserirBase, Store {
   final _$idCadastroAtom = Atom(name: '_ControllerInserirBase.idCadastro');
 
   @override
-  int get idCadastro {
+  int? get idCadastro {
     _$idCadastroAtom.reportRead();
     return super.idCadastro;
   }
 
   @override
-  set idCadastro(int value) {
+  set idCadastro(int? value) {
     _$idCadastroAtom.reportWrite(value, super.idCadastro, () {
       super.idCadastro = value;
     });
@@ -44,12 +44,12 @@ mixin _$ControllerInserir on _ControllerInserirBase, Store {
 
   @override
   Future<void> Cadastrar(
-      {String nome,
-      String email,
-      String data_nascimento,
-      String sexo,
-      String data,
-      Function onsuccess}) {
+      {String? nome,
+      String? email,
+      String? data_nascimento,
+      String? sexo,
+      String? data,
+      Function? onsuccess}) {
     return _$CadastrarAsyncAction.run(() => super.Cadastrar(
         nome: nome,
         email: email,

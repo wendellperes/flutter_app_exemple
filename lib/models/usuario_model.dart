@@ -8,7 +8,7 @@ class Usuario {
    int    idade        =  0;
    String data_criacao = '';
 
-  Usuario({this.id, this.name, this.email, this.nascimento, this.sexo, this.idade, this.data_criacao });
+  Usuario({required this.id, required this.name, required this.email, required this.nascimento, required this.sexo, required this.idade, required this.data_criacao });
 
   Map<String, dynamic>toMap(){
     return{

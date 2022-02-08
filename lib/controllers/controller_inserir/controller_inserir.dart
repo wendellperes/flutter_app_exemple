@@ -12,23 +12,23 @@ class ControllerInserir = _ControllerInserirBase with _$ControllerInserir;
 abstract class _ControllerInserirBase with Store {
   ControllerGeral controllerGeral =  ControllerGeral();
 @observable
- int idCadastro;
+ int? idCadastro;
 @observable
- int idade;
+ int idade = 0;
 @action
   Future<void>Cadastrar({
-  @required String nome,
-  @required String email,
-  @required String  data_nascimento,
-  @required String sexo,
-  @required String data,
-  @required Function onsuccess,}
+  @required String? nome,
+  @required String? email,
+  @required String?  data_nascimento,
+  @required String? sexo,
+  @required String? data,
+  @required Function? onsuccess,}
   ) async {
 
    try {
      final Database db = await controllerGeral.getDatabase();
      //Bloco Responsavel por pegar a idade do usuarios
-     var campos = data_nascimento.split('-');
+     var campos = data_nascimento!.split('-');
      int ano = int.parse(campos[0]);
      int mes = int.parse(campos[1]);
      int dia = int.parse(campos[2]);
@@ -46,19 +46,20 @@ abstract class _ControllerInserirBase with Store {
 
      //////
      var dados =  Usuario(
-         name: nome,
-         email: email,
+        id: 0,
+         name: nome!,
+         email: email!,
          nascimento: data_nascimento,
-         sexo: sexo,
+         sexo: sexo!,
          idade: idade,
-         data_criacao: data
+         data_criacao: data!
      );
      print(idade);
      idCadastro  = await db.insert(
        'tbl_usuario',
        dados.toMap(),
      );
-     idCadastro != 0 ? onsuccess(true) : onsuccess(false);
+     idCadastro != 0 ? onsuccess!(true) : onsuccess!(false);
    } catch (ex) {
      print(ex);
      return;
