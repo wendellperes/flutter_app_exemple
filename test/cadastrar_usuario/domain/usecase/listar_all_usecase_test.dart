@@ -14,11 +14,26 @@ class FakeFaqExtraEntity extends Fake implements UsuarioEntity {}
 void main() {
   late MockFaqRepository repository;
   late ListarUseCase faqPixListUsecase;
-  final UsuarioEntity usuarioEntityInitial = UsuarioEntity(
-      name: 'Wendell Caco',
+  final List<UsuarioEntity> listEntity = [
+    UsuarioEntity(
+      name: 'Wendell Caco1',
       email: 'email@hotmmail.com',
       dataNascimento: '10/02/7878',
-      sexo: 'M');
+      sexo: 'M',
+      ),
+      UsuarioEntity(
+      name: 'Wendell Caco2',
+      email: 'email@hotmmail.com',
+      dataNascimento: '10/02/7878',
+      sexo: 'M',
+      ),
+      UsuarioEntity(
+      name: 'Wendell Caco3',
+      email: 'email@hotmmail.com',
+      dataNascimento: '10/02/7878',
+      sexo: 'M',
+      )
+  ];
 
   setUpAll(() {
     repository = MockFaqRepository();
@@ -26,21 +41,21 @@ void main() {
     registerFallbackValue(FakeFaqExtraEntity());
   });
 
-  void setWhenSuccess(UsuarioEntity usuarioEntity) {
+  void setWhenSuccess(List<UsuarioEntity> usuarioEntity) {
     when(() => repository.list())
-        .thenAnswer((_) async => Right(usuarioEntityInitial));
+        .thenAnswer((_) async => Right(listEntity));
   }
 
   group('Listar Usuarios : ', () {
     test('Deve retornar um objeto do tipo UsuarioEntity como sucesso',
         () async {
-      setWhenSuccess(usuarioEntityInitial);
+      setWhenSuccess(listEntity);
 
       final result = await faqPixListUsecase(NoParams());
 
       result.fold((l) => null, (r){
 
-          expect(r, usuarioEntityInitial);
+          expect(r, listEntity);
       });
       
     });
