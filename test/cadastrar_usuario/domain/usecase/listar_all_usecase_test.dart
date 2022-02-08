@@ -1,8 +1,8 @@
-import 'package:avaliacao_empresa_flutter/listar_usuario/domain/entities/usuario_entities.dart';
-import 'package:avaliacao_empresa_flutter/listar_usuario/domain/repositories/listar_repository.dart';
-import 'package:avaliacao_empresa_flutter/listar_usuario/domain/usecase/listar_usecase.dart';
+
 import 'package:avaliacao_empresa_flutter/core/usecases/no_params.dart';
-import 'package:avaliacao_empresa_flutter/listar_usuario/domain/repositories/listar_repository.dart';
+import 'package:avaliacao_empresa_flutter/features/listar_usuario/domain/entities/usuario_entities.dart';
+import 'package:avaliacao_empresa_flutter/features/listar_usuario/domain/repositories/listar_repository.dart';
+import 'package:avaliacao_empresa_flutter/features/listar_usuario/domain/usecase/listar_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
