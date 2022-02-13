@@ -1,5 +1,6 @@
-import 'package:avaliacao_empresa_flutter/features/usuarios/domain/entities/usuario_listar_entitie.dart';
 import 'package:dartz/dartz.dart';
+
+import '../entities/usuario_listar_entitie.dart';
 
 abstract class IUsuarioRepository {
   Future<Either<Exception, bool>> register(UsuarioEntity usuarioEntity);

@@ -1,7 +1,8 @@
-import 'package:avaliacao_empresa_flutter/features/usuarios/data/datasource/usuario_datasource.dart';
-import 'package:avaliacao_empresa_flutter/features/usuarios/domain/entities/usuario_listar_entitie.dart';
-import 'package:avaliacao_empresa_flutter/features/usuarios/domain/repositories/usuario_repository.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../domain/entities/usuario_listar_entitie.dart';
+import '../../domain/repositories/usuario_repository.dart';
+import '../datasource/usuario_datasource.dart';
 
 class FaqExtraRepositoryImpl implements IUsuarioRepository {
   final IUsuarioNetworkDataSource _usuarioDataSource;

@@ -1,4 +1,5 @@
-import 'package:avaliacao_empresa_flutter/features/usuarios/domain/entities/usuario_listar_entitie.dart';
+
+import '../../domain/entities/usuario_listar_entitie.dart';
 
 abstract class IUsuarioNetworkDataSource {
   Future<List<UsuarioEntity>> listAll();

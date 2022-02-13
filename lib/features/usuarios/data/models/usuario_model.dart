@@ -1,6 +1,7 @@
-import 'package:avaliacao_empresa_flutter/features/usuarios/domain/entities/usuario_listar_entitie.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../../domain/entities/usuario_listar_entitie.dart';
 
 part 'usuario_model.g.dart';
 
