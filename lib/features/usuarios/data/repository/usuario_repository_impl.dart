@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../../domain/entities/usuario_listar_entitie.dart';
+import '../../domain/entities/usuario_entity.dart';
 import '../../domain/repositories/usuario_repository.dart';
 import '../datasource/usuario_datasource.dart';
 

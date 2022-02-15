@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../entities/usuario_listar_entitie.dart';
+import '../entities/usuario_entity.dart';
 
 abstract class IUsuarioRepository {
   Future<Either<Exception, bool>> register(UsuarioEntity usuarioEntity);

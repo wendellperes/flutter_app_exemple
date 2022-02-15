@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../domain/entities/usuario_listar_entitie.dart';
+import '../../domain/entities/usuario_entity.dart';
 
 part 'usuario_model.g.dart';
 

@@ -1,5 +1,5 @@
 
-import '../../domain/entities/usuario_listar_entitie.dart';
+import '../../domain/entities/usuario_entity.dart';
 
 abstract class IUsuarioNetworkDataSource {
   Future<List<UsuarioEntity>> listAll();
